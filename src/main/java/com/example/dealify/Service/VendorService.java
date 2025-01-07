@@ -311,7 +311,7 @@ public class VendorService { //Ebtehal
         blackListService.addCustomerToBlacklist(vendorProfile, customerId, blackListInDTO);
     }
 
-    public void removeCustomerFromBlackList(Integer vendorId, Integer customerId) {//Waleed
+    public void removeCustomerFromBlackList(Integer vendorId, Integer customerId) {//EBTEHAL
         VendorProfile vendorProfile = vendorProfileRepository.findVendorProfileById(vendorId);
         if (vendorProfile == null) throw new ApiException("Vendor not found");
 

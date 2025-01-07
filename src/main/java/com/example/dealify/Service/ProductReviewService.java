@@ -34,7 +34,7 @@ public class ProductReviewService {
         return productReviewOutDTOS;
     }
 
-    public void reviewAProduct(Customer customer, Integer productId, ProductReviewInDTO productReviewInDTO){
+    public void reviewAProduct(Customer customer, Integer productId, ProductReviewInDTO productReviewInDTO){ // Ebtehal
         Product product=productRepository.findProductById(productId);
         if (product==null) throw new ApiException("Product not found");
 
