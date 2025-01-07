@@ -316,7 +316,7 @@ public class CustomerService {
         return returnRequestService.getCustomerReturnRequests(customerId);
     }
 
-    public void reviewAProduct(Integer customerId, Integer productId, ProductReviewInDTO productReviewInDTO) {//Waleed
+    public void reviewAProduct(Integer customerId, Integer productId, ProductReviewInDTO productReviewInDTO) {//EBTEHAL
         Customer customer = customerRepository.findCustomerById(customerId);
         if (customer == null) throw new ApiException("Customer not found");
 
@@ -339,7 +339,7 @@ public class CustomerService {
     }
 
     public void requestAPardon(Integer customerId, Integer vendorId, BlackListPardonRequestCustomerInDTO
-            blackListPardonRequestCustomerInDTO) {//Waleed
+            blackListPardonRequestCustomerInDTO) {//EBTEHAL
         Customer customer = customerRepository.findCustomerById(customerId);
         if (customer == null) throw new ApiException("Customer not found");
 

@@ -50,7 +50,7 @@ public class BlackListPardonRequestService {
         return blackListPardonRequestOutDTOS;
     }
 
-    public void requestAPardon(Customer customer, Integer vendorId, BlackListPardonRequestCustomerInDTO blackListPardonRequestCustomerInDTO){
+    public void requestAPardon(Customer customer, Integer vendorId, BlackListPardonRequestCustomerInDTO blackListPardonRequestCustomerInDTO){ //EBTEHAL
         VendorProfile vendorProfile= vendorProfileRepository.findVendorProfileById(vendorId);
         Blacklist blackList=blackListRepository.findBlackListByCustomerAndVendor(customer,vendorProfile);
 
