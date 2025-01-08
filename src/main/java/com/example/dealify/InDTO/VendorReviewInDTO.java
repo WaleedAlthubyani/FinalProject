@@ -34,4 +34,5 @@ public class VendorReviewInDTO {
 
     @Size(max = 255, message = "Comment can't exceed 255 characters.")
     private String comment;
+
 }
