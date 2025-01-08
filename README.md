@@ -70,12 +70,15 @@
 
 ---
 
+
 #
 # Links
 - [Figma](https://www.figma.com/design/kUyt9oIMPtgUqbXLnBDkS3/Dealify?node-id=0-1&t=GhXfJIKfyUDjqQfR-1)
 - [Presentation](https://www.canva.com/design/DAGbZqlKQ60/OAW5OSI2w2P_I_IUJoBvkQ/edit?utm_content=DAGbZqlKQ60&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [PostMan API Documentation](https://documenter.getpostman.com/view/39709967/2sAYJAdGzY)
+
 - ![QR Code](https://github.com/user-attachments/assets/dd59b236-3b36-40fc-91c6-270ec574485a)
+
 
 
 #

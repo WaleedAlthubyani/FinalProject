@@ -20,9 +20,6 @@ public class Vendor { //Ebtehal
     private Integer id;
 
     @Column(columnDefinition = "varchar(10) not null unique")
-    private String phoneNumber;
-
-    @Column(columnDefinition = "varchar(10) not null unique")
     private String commercialRegistration;
 
     @Column(columnDefinition = "varchar(10)")

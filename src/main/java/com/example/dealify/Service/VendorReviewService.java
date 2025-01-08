@@ -17,11 +17,20 @@ import java.util.List;
 public class VendorReviewService {
     private final VendorProfileRepository vendorProfileRepository;
     private final DealRepository dealRepository;
-    private final CustomerProfileRepository customerProfileRepository;
     private final ProductRepository productRepository;
     private final VendorReviewRepository vendorReviewRepository;
     private final CustomerRepository customerRepository;
 
+    public List<VendorReview> getAllVendorReviews(){//Waleed
+        return vendorReviewRepository.findAll();
+    }
+
+    public void deleteAVendorReview(Integer vendorReviewId){//Waleed
+        VendorReview vendorReview=vendorReviewRepository.findVendorReviewById(vendorReviewId);
+        if (vendorReview==null) throw new ApiException("Vendor review not found");
+
+        vendorReviewRepository.delete(vendorReview);
+    }
 
     public void addVendorReview(Integer customerId, Integer productId, VendorReviewInDTO vendorReviewInDTO) {
         Customer customer = customerRepository.findCustomerById(customerId);
@@ -82,9 +91,6 @@ public class VendorReviewService {
     }
 
 
-
-
-
     public void updateVendorReview(Integer customerId,Integer reviewId, VendorReviewInDTO vendorReviewInDTO) {
         Customer customer = customerRepository.findCustomerById(customerId);
         if (customer == null) {
@@ -126,6 +132,4 @@ public class VendorReviewService {
         vendorProfileRepository.save(vendorProfile);
         vendorReviewRepository.delete(vendorReview);
     }
-
-
 }

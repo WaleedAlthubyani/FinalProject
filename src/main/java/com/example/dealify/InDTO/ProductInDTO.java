@@ -33,7 +33,4 @@ public class ProductInDTO { //Renad
     @NotNull(message = "Stock is required.")
     @Positive(message = "Stock must be a positive number.")
     private Integer stock;
-
-    @NotNull(message = "Category id is required.")
-    private Integer categoryId;
 }

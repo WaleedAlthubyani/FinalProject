@@ -50,7 +50,7 @@ public class VendorServiceTest {
     @BeforeEach
     void setUp() {
         vendorInDTO = new VendorInDTO();
-        vendorInDTO.setName("John Vendor");
+        vendorInDTO.setFullName("John Vendor");
         vendorInDTO.setUsername("johnvendor");
         vendorInDTO.setEmail("john.vendor@example.com");
         vendorInDTO.setPassword("password");
@@ -59,14 +59,14 @@ public class VendorServiceTest {
 
         myUser = new MyUser();
         myUser.setId(1);
-        myUser.setName("John Vendor");
+        myUser.setFullName("John Vendor");
         myUser.setUsername("johnvendor");
         myUser.setEmail("john.vendor@example.com");
+        myUser.setPhoneNumber("+966512345678");
         myUser.setRole("VENDOR");
 
         vendor = new Vendor();
         vendor.setId(1);
-        vendor.setPhoneNumber("+966512345678");
         vendor.setCommercialRegistration("CR123456");
         vendor.setStatus("Inactive");
         vendor.setMyUser(myUser);
@@ -82,14 +82,14 @@ public class VendorServiceTest {
         when(authRepository.existsByUsername(any(String.class))).thenReturn(false);
         when(authRepository.existsByEmail(any(String.class))).thenReturn(false);
         when(vendorRepository.existsByCommercialRegistration(any(String.class))).thenReturn(false);
-        when(vendorRepository.existsByPhoneNumber(any(String.class))).thenReturn(false);
+        when(vendorRepository.existsByMyUser_PhoneNumber(any(String.class))).thenReturn(false);
 
         vendorService.register(vendorInDTO);
 
         verify(authRepository, times(1)).existsByUsername(any(String.class));
         verify(authRepository, times(1)).existsByEmail(any(String.class));
         verify(vendorRepository, times(1)).existsByCommercialRegistration(any(String.class));
-        verify(vendorRepository, times(1)).existsByPhoneNumber(any(String.class));
+        verify(vendorRepository, times(1)).existsByMyUser_PhoneNumber(any(String.class));
         verify(authRepository, times(1)).save(any(MyUser.class));
         verify(vendorRepository, times(1)).save(any(Vendor.class));
         verify(vendorProfileRepository, times(1)).save(any(VendorProfile.class));
@@ -102,7 +102,7 @@ public class VendorServiceTest {
         when(authRepository.findMyUserById(any(Integer.class))).thenReturn(myUser);
 
         VendorInDTO updatedVendorInDTO = new VendorInDTO();
-        updatedVendorInDTO.setName("Updated Name");
+        updatedVendorInDTO.setFullName("Updated Name");
         updatedVendorInDTO.setUsername("updatedusername");
         updatedVendorInDTO.setEmail("updated.email@example.com");
         updatedVendorInDTO.setPassword("updatedpassword");

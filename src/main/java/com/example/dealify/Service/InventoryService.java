@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor 
 public class InventoryService { //Renad
 
     // 1. Declare a dependency for InventoryRepository using Dependency Injection

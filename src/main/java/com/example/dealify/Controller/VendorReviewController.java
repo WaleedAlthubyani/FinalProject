@@ -16,6 +16,16 @@ import org.springframework.web.bind.annotation.*;
 public class VendorReviewController { //Ebtehal
     private final VendorReviewService vendorReviewService;
 
+    @GetMapping("/get-all-vendorsReviews")//Waleed
+    public ResponseEntity getAllVendorReviews(){
+        return ResponseEntity.status(200).body(vendorReviewService.getAllVendorReviews());
+    }
+
+    @DeleteMapping("/delete-a-vendor-review/{vendor-review-id}")//Waleed
+    public ResponseEntity deleteAVendorReview(@PathVariable(name = "vendor-review-id") Integer vendorReviewId){
+        vendorReviewService.deleteAVendorReview(vendorReviewId);
+        return ResponseEntity.status(200).body(new ApiResponse("Review deleted successfully"));
+    }
 
     @PostMapping("/add-review/{product-id}")
     public ResponseEntity addReview(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "product-id") Integer productId, @RequestBody @Valid VendorReviewInDTO vendorReviewInDTO) {

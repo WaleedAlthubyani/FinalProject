@@ -9,4 +9,5 @@ import lombok.Data;
 public class BlackListPardonRequestVendorInDTO {//Waleed
     @NotEmpty(message = "varchar(255) not null")
     private String response;
+
 }

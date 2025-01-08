@@ -27,7 +27,7 @@ public class MyUser implements UserDetails { //Ebtehal
     private Integer id;
 
     @Column(columnDefinition = "varchar(20) not null")
-    private String name;
+    private String fullName;
 
     @Column(columnDefinition = "varchar(10) not null unique")
     private String username;
@@ -37,6 +37,9 @@ public class MyUser implements UserDetails { //Ebtehal
 
     @Column(columnDefinition = "varchar(255) not null")
     private String password;
+
+    @Column(columnDefinition = "varchar(10) not null unique")
+    private String phoneNumber;
 
     @Column(columnDefinition = "varchar(20) not null")
     @Pattern(regexp = "^(?i)(VENDOR|CUSTOMER|ADMIN)$", message = "User Role must be either 'Vendor', 'Customer', or 'Admin' only")

@@ -20,11 +20,15 @@ public class FavoriteService {
 
     private final FavoriteRepository favoriteRepository;
 
-    public FavoriteOutDTO getCustomerFavorites(CustomerProfile customerProfile){
+    public List<Favorite> getAllFavorites(){//Waleed
+        return favoriteRepository.findAll();
+    }
+
+    public FavoriteOutDTO getCustomerFavorites(CustomerProfile customerProfile){//Waleed
         return convertFavoriteToDTO(favoriteRepository.findFavoriteByCustomer(customerProfile).getProduct());
     }
 
-    public void addProductToFavorite(CustomerProfile customer,Product product){
+    public void addProductToFavorite(CustomerProfile customer,Product product){//Waleed
         Favorite favorite=favoriteRepository.findFavoriteByCustomer(customer);
 
         if (favorite==null) {favorite=new Favorite(); favorite.setCustomer(customer);}
@@ -38,7 +42,7 @@ public class FavoriteService {
         favoriteRepository.save(favorite);
     }
 
-    public void removeProductFromFavorite(CustomerProfile customer, Product product){
+    public void removeProductFromFavorite(CustomerProfile customer, Product product){//Waleed
         Favorite favorite=favoriteRepository.findFavoriteByCustomer(customer);
 
         if (!favorite.getProduct().contains(product))
@@ -49,7 +53,7 @@ public class FavoriteService {
         favoriteRepository.save(favorite);
     }
 
-    public FavoriteOutDTO convertFavoriteToDTO(Collection<Product> products){
+    public FavoriteOutDTO convertFavoriteToDTO(Collection<Product> products){//Waleed
         List<ProductOutCU> productsDTO=new ArrayList<>();
 
         for (Product p:products){

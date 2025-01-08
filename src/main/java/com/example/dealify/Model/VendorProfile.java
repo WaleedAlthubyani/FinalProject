@@ -23,9 +23,6 @@ public class VendorProfile {// Ebtehal
     private String companyName;
 
     @Column(columnDefinition = "varchar(10)")
-    private String fundamentalFile;
-
-    @Column(columnDefinition = "varchar(10)")
     private String city;
 
     @OneToOne
@@ -42,7 +39,6 @@ public class VendorProfile {// Ebtehal
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendor")
     private Set<VendorReview> vendorReviews;
-
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "vendor")
     private Set<Blacklist> blackList;

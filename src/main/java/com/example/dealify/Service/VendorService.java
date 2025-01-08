@@ -43,14 +43,15 @@ public class VendorService { //Ebtehal
         if (vendorRepository.existsByCommercialRegistration(vendorInDTO.getCommercialRegistration())) {
             throw new ApiException("Commercial Registration already exists.");
         }
-        if (vendorRepository.existsByPhoneNumber(vendorInDTO.getPhoneNumber())) {
+        if (vendorRepository.existsByMyUser_PhoneNumber(vendorInDTO.getPhoneNumber())) {
             throw new ApiException("Phone number already exists.");
         }
 
         // Create and set up MyUser
         MyUser myUser1 = new MyUser();
-        myUser1.setName(vendorInDTO.getName());
+        myUser1.setFullName(vendorInDTO.getFullName());
         myUser1.setUsername(vendorInDTO.getUsername());
+        myUser1.setPhoneNumber(vendorInDTO.getPhoneNumber());
         myUser1.setEmail(vendorInDTO.getEmail());
         String hashPassword = new BCryptPasswordEncoder().encode(vendorInDTO.getPassword());
         myUser1.setPassword(hashPassword);
@@ -58,7 +59,6 @@ public class VendorService { //Ebtehal
 
         // Create and set up Vendor
         Vendor vendor = new Vendor();
-        vendor.setPhoneNumber(vendorInDTO.getPhoneNumber());
         vendor.setCommercialRegistration(vendorInDTO.getCommercialRegistration());
         vendor.setStatus("Inactive"); // Set the status as inactive
         vendor.setMyUser(myUser1);
@@ -91,12 +91,12 @@ public class VendorService { //Ebtehal
             throw new ApiException("Vendor Not Found.");
         }
 
-        oldUser.setName(vendorInDTO.getName());
+        oldUser.setFullName(vendorInDTO.getFullName());
         oldUser.setUsername(vendorInDTO.getUsername());
         oldUser.setEmail(vendorInDTO.getEmail());
         String hashPassword = new BCryptPasswordEncoder().encode(vendorInDTO.getPassword());
         oldUser.setPassword(hashPassword);
-        oldUser.getVendor().setPhoneNumber(vendorInDTO.getPhoneNumber());
+        oldUser.setPhoneNumber(vendorInDTO.getPhoneNumber());
         oldUser.getVendor().setCommercialRegistration(vendorInDTO.getCommercialRegistration());
 
         authRepository.save(oldUser);
@@ -159,7 +159,7 @@ public class VendorService { //Ebtehal
 
         List<VendorReviewOutDTO> reviewOutDTOS = new ArrayList<>();
         for (VendorReview vendorReview : vendor.getVendorReviews()) {
-            VendorReviewOutDTO reviewOutDTO = new VendorReviewOutDTO(vendorReview.getOverallRating(), vendorReview.getServiceRating(), vendorReview.getProductQualityRating(), vendorReview.getReturnPolicyRating(), vendorReview.getDeliveryRating(), vendorReview.getComment(), vendorReview.getCustomer().getMyUser().getName());
+            VendorReviewOutDTO reviewOutDTO = new VendorReviewOutDTO(vendorReview.getOverallRating(), vendorReview.getServiceRating(), vendorReview.getProductQualityRating(), vendorReview.getReturnPolicyRating(), vendorReview.getDeliveryRating(), vendorReview.getComment(), vendorReview.getCustomer().getMyUser().getFullName());
             reviewOutDTOS.add(reviewOutDTO);
         }
 
@@ -207,7 +207,7 @@ public class VendorService { //Ebtehal
             productOutDTOS.add(productOutDTO);
         }
 
-        return new VendorProfileOutDTO(vendor.getVendor().getMyUser().getName(), vendor.getCompanyName(), vendor.getVendor().getPhoneNumber(), vendor.getCity(), vendor.getFundamentalFile(), reviewOutDTOS, productOutDTOS);
+        return new VendorProfileOutDTO(vendor.getVendor().getMyUser().getFullName(), vendor.getCompanyName(), vendor.getVendor().getMyUser().getPhoneNumber(), vendor.getCity(), reviewOutDTOS, productOutDTOS);
     }
 
     // 4. Get vendor inventory
@@ -289,7 +289,7 @@ public class VendorService { //Ebtehal
                     returnRequest.getProduct().getBrand(),
                     returnRequest.getProduct().getName(),
                     returnRequest.getProduct().getPrice(),
-                    returnRequest.getVendorProfile().getVendor().getMyUser().getName());
+                    returnRequest.getVendorProfile().getVendor().getMyUser().getFullName());
             returnRequestOutDTOS.add(returnRequestOutDTO);
         }
         return returnRequestOutDTOS;

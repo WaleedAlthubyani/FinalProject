@@ -13,9 +13,9 @@ import org.hibernate.annotations.Check;
 public class CustomerInDTO { //Ebtehal
     private Integer Id;
 
-    @NotEmpty(message = "User Name cannot be null")
-    @Size(min = 2, max = 20, message = " Name can not be less than 2 and more than 20 characters")
-    private String name;
+    @NotEmpty(message = "Full name cannot be null")
+    @Size(min = 2, max = 20, message = "Full name can not be less than 2 and more than 20 characters")
+    private String fullName;
 
     @NotEmpty(message = "Username cannot be null")
     @Size(min = 3, max = 10, message = "Username can not be less than 3 and  more than 10 characters")
@@ -31,4 +31,8 @@ public class CustomerInDTO { //Ebtehal
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,20}$", message = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
     @Check(constraints = "length(password) >= 8")
     private String password;
+
+    @NotEmpty(message = "Phone Number can not be null")
+    @Pattern(regexp = "^05\\d{8}$", message = "Phone number must start with '05' and be followed by 8 digits")
+    private String phoneNumber;
 }

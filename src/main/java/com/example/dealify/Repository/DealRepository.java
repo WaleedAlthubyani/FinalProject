@@ -30,10 +30,5 @@ public interface DealRepository extends JpaRepository<Deal, Integer> {//Waleed
     @Query("select d from Deal d join d.product p where p.inventory.id=?1 and d.status=?2")
     List<Deal> findDealsByVendorAndOpen(Integer id, String status);
 
-    Deal findDealByCreatorAndProductAndStatus(CustomerProfile creator, Product product, String status);
-
-    Deal findDealByProductAndStatus(Product product, String status);
-
     Deal findDealByProductAndParticipantsLimitAndStatus(Product product, Integer participantsLimit,String status);
-
 }

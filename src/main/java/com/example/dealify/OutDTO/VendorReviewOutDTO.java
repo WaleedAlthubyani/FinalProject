@@ -12,5 +12,5 @@ public class VendorReviewOutDTO { //Ebtehal
     private Integer deliveryRating;
     private Integer returnPolicyRating;
     private String comment;
-    private String name;
+    private String reviewerName;
 }

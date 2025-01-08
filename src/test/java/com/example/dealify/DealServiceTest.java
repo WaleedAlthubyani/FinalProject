@@ -106,5 +106,3 @@ public class DealServiceTest { // Renad
     @Test
     public void viewVendorsOpenDealsTest() { when(dealRepository.findDealsByVendorAndOpen(anyInt(), eq("open"))).thenReturn(deals); List<DealOutDTO> openDeals = dealService.viewVendorsOpenDeals(vendorProfile); assertEquals(2, openDeals.size()); verify(dealRepository, times(1)).findDealsByVendorAndOpen(anyInt(), eq("open")); }
 }
-
-

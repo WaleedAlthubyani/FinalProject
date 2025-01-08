@@ -1,5 +1,6 @@
 package com.example.dealify.Repository;
 
+import com.example.dealify.Model.Customer;
 import com.example.dealify.Model.VendorProfile;
 import com.example.dealify.Model.VendorReview;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,7 @@ public interface VendorReviewRepository extends JpaRepository<VendorReview, Inte
     VendorReview findVendorReviewById(Integer id);
 
     List<VendorReview> findVendorReviewsByVendor(VendorProfile vendorProfile);
+
+    VendorReview findVendorReviewByVendorAndCustomer(VendorProfile vendor, Customer customer);
+
 }

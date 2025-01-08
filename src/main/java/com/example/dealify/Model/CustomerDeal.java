@@ -29,7 +29,7 @@ public class CustomerDeal {  //Waleed
     @Column(columnDefinition = "double not null")
     private Double discountedPrice;
 
-    //Pending-Card-Points
+    //Pending-Normal-Points
     @Column(columnDefinition = "varchar(7)")
     private String payMethod="Pending";
 
@@ -39,6 +39,10 @@ public class CustomerDeal {  //Waleed
 
     @Column(columnDefinition = "timestamp")
     private LocalDateTime updatedAt;
+
+    //Joined-Left
+    @Column(columnDefinition = "varchar(6)")
+    private String status;
 
     @ManyToOne
     @JsonIgnore
