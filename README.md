@@ -1,62 +1,75 @@
-# Dealify | صفقتنا
-Dealify is an innovative platform that allows users to purchase products at discounted prices by gathering a specific number of participants in the same deal.
-#
-Key Features:
-- For Customers:
-1. Track Deals:
-      - Monitor active deals and progress.
-2. Create or Join Deals:
-      - Initiate a new group deal or participate in an existing one.
-3. Ratings and Reviews:
-      - Rate products, sellers, or other users within the same deal.
-      - Evaluate the reliability of users (e.g., flag users who frequently abandon deals).
-3. Requests:
-      - Submit requests to be removed from the blacklist.
-      - Request product returns with a detailed reason.
+# Delify | صفقتنا
 
+**"Delify | صفقتنا"** is an innovative platform that offers users the opportunity to purchase products at discounted prices by gathering a sufficient number of participants for the same deal.
 
-- For Vendors:
-1. Product Management:
-     - Add and manage products on the platform.
-2. Blacklist Management:
-     - Add or remove users from the blacklist.
-3. Return Requests:
-     - Approve or reject product return requests.
-4. Client Reviews:
-    - Evaluate and rate clients based on their participation behavior.
-  
-Dealify connects users and vendors in a unified platform, creating a collaborative shopping experience where group purchasing unlocks exclusive discounts, fostering a thriving community of deal seekers and sellers.
-#
+---
 
-# النسخة العربية:
+## Objective
+- Enable users to enjoy reduced prices through collective purchasing.
+- Provide a seamless and reliable shopping experience.
+- Increase merchants' profits by consolidating large orders.
 
-"صفقتنا" هي منصة مبتكرة تتيح للمستخدمين شراء المنتجات بأسعار مخفضة من خلال جمع عدد محدد من المشاركين في نفس الصفقة.
+---
 
-الميزات الرئيسية:
-- للعملاء:
-1. متابعة الصفقات:
-    - متابعة الصفقات النشطة وتقدمها.
-2. إنشاء أو الانضمام إلى صفقات:
-    - بدء صفقة جماعية جديدة أو المشاركة في صفقة موجودة.
-3. التقييمات والمراجعات:
-    - تقييم المنتجات أو البائعين أو المستخدمين الآخرين ضمن نفس الصفقة.
-    - تقييم موثوقية المستخدمين (مثلًا، الإشارة إلى المستخدمين الذين يتخلفون عن إتمام الصفقات).
-4. الطلبات:
-    - تقديم طلبات لإزالة المستخدمين من القائمة السوداء.
-    - طلب استرجاع المنتجات مع تقديم سبب مفصل.
+## Target Audience
+- Individuals seeking significant deals and offers.
+- Merchants looking to showcase and sell their products efficiently.
 
+---
 
-- للبائعين:
-1. إدارة المنتجات:
-    - إضافة وإدارة المنتجات على المنصة.
-2. إدارة القائمة السوداء:
-    - إضافة أو إزالة المستخدمين من القائمة السوداء.
-3. طلبات الإرجاع:
-    - الموافقة أو الرفض على طلبات إرجاع المنتجات.
-4. مراجعات العملاء:
-    - تقييم العملاء بناءً على سلوكهم في المشاركة في الصفقات.
-  
-صفقتنا تربط المستخدمين والبائعين في منصة موحدة، مما يخلق تجربة تسوق تعاونية حيث تتيح الشراء الجماعي الحصول على خصومات حصرية، مما يعزز مجتمعًا مزدهرًا من الباحثين عن الصفقات والبائعين.
+## User Flow
+
+### Registered Users
+- Track their deals.
+- Create or join deals.
+- Review products, merchants, or other users they have participated with in deals.
+- Request to be removed from the blocklist.
+- Submit product return requests with reasons.
+
+### Merchants
+- Add new products.
+- Add or remove users from the blocklist (Blocklist Management).
+- Approve or reject return requests (Return Management).
+- Rate customers.
+
+---
+
+### صفقتنا | Delify
+
+"Delify | صفقتنا" هي منصة مبتكرة تتيح للمستخدمين شراء المنتجات بأسعار مخفضة من خلال تجمع عدد كافٍ من المشاركين في نفس الصفقة.
+
+---
+
+## الأهداف
+- تمكين المستخدمين من الحصول على خصومات كبيرة عبر الشراء الجماعي.
+- توفير تجربة تسوق سلسة وموثوقة.
+- زيادة أرباح التجار عبر تجميع طلبات كبيرة.
+
+---
+
+## الشريحة المستهدفة
+- الأفراد الباحثين عن صفقات وعروض مميزة.
+- التجار الراغبين في عرض وبيع منتجاتهم بفعالية.
+
+---
+
+## تدفق المستخدمين
+
+### المستخدمون المسجلون
+- متابعة صفقاتهم.
+- إنشاء صفقة أو الانضمام إلى صفقات قائمة.
+- تقييم المنتجات، البائعين، أو المستخدمين الذين شاركوا معهم في الصفقات.
+- طلب إزالة من القائمة السوداء.
+- تقديم طلبات إرجاع المنتجات مع ذكر الأسباب.
+
+### التجار
+- إضافة منتجات جديدة.
+- إضافة أو إزالة المستخدمين من القائمة السوداء (إدارة القائمة السوداء).
+- قبول أو رفض طلبات الإرجاع (إدارة الطلبات).
+- تقييم العملاء.
+
+---
+
 
 #
 # Links
@@ -64,72 +77,125 @@ Dealify connects users and vendors in a unified platform, creating a collaborati
 - [Presentation](https://www.canva.com/design/DAGbZqlKQ60/OAW5OSI2w2P_I_IUJoBvkQ/edit?utm_content=DAGbZqlKQ60&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [PostMan API Documentation](https://documenter.getpostman.com/view/39709967/2sAYJAdGzY)
 
+- ![QR Code](https://github.com/user-attachments/assets/dd59b236-3b36-40fc-91c6-270ec574485a)
+
+
 
 #
 # Diagrams
 UseCase Diagrams:
+- ![UseCase](https://github.com/user-attachments/assets/12d485e2-0cf4-4181-8254-3eb917b8670d)
 
-![UseCase](https://github.com/user-attachments/assets/4dd2d850-a491-451b-8e94-c04c3a215827)
 
 Class Diagram:
+- ![Class Diagram](https://github.com/user-attachments/assets/6df6f3d8-4659-480f-b86a-6cc68798e1a8)
 
-![Class Diagram](https://github.com/user-attachments/assets/9bed6ad3-19b9-4eb3-a15f-d2a6064c7b68)
+---
 
-#
-BackEnd:
-Models:
-1. Category
-2. CustomerReview
-3. Inventory
-4. Product
-5. ReturnRequest.
+## My Work
 
-Repositories:
-1. CategoryRepository.
-2. CustomerReviewRepository.
-3. InventoryRepository.
-4. ProductRepository.
-5. ReturnRequestRepository.
+### Models-In/OutDTO-repository-CRUD:
+- Blacklist  
+- BlackListPardonRequest  
+- CustomerDeal  
+- Deal  
+- Favorite  
+- Image  
+- ProductReview  
+- VendorReview  
 
-Services:
-1. CategoryService
-2. InventoryService
-3. ReturnRequestService
+### JUnit tests:
+**ProductRepositoryTest:**
+- findProductByIdTesting  
+- findProductsByCategoryNameTesting  
+- findByStockLessThanTesting  
+- findByPriceBetweenTesting  
+- findProductByInventory  
 
-Controller:
-1. CategoryController
-2. CustomerReviewController
-3. InventoryController
-4. ReturnRequestController
+### Endpoints:
+- `/create-a-deal/product-id/{product-id}`  
+  `createADeal`  
 
-In & Out DTOs:
-1. CustomerReviewInDTO
-2. ProductInDTO
-3. ReturnRequestCustomerInDTO
-4. CategoryOutDTO
-5. CustomerReviewOutDTO
-6. ProductOutDTO
-7. ReturnRequestOutDTO
+- `/get-customer-open-deals`  
+  `viewCustomerOpenedDeals`  
 
-JUnit Test:
-1. addCategoryTest()
-2. updateCategoryTest()
-3. DealServiceTest
-4. updateVendorTest()
-5. deleteVendorTest()
+- `/get-customer-completed-deals`  
+  `viewCustomerCompletedDeals`  
 
-Extra Endpoints:
-1. public ResponseEntity getCategoryByName(@PathVariable String name) {}
-2. public ResponseEntity viewDealsByProductCategory(@PathVariable(name = "category-name") String categoryName) {}
-3. public ResponseEntity deleteACustomerReview(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "review-id") Integer ReviewId) {}
-4. public ResponseEntity viewProductById(@PathVariable(name = "product-id") Integer productId) {}
-5. public ResponseEntity viewProductImages(@PathVariable(name = "product-id") Integer productId) {}
-6. public ResponseEntity viewProductsByVendor(@PathVariable(name = "vendor-id") Integer vendorId) {}
-7. public ResponseEntity creatReturnRequest(@AuthenticationPrincipal MyUser myUser, @PathVariable Integer productId, @PathVariable Integer dealId, @RequestBody @Valid ReturnRequestCustomerInDTO returnRequestCustomerInDTO) {}
-8. public ResponseEntity getVendorReturnRequests(@AuthenticationPrincipal MyUser myUser) {}
-9. public ResponseEntity getVendorInventory(@AuthenticationPrincipal MyUser myUser) {}
-10. public ResponseEntity getVendorProfileById(@PathVariable(name = "vendor-id") Integer vendorId) {}
-11. public ResponseEntity activateVendor(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "vendor-id") Integer vendorId) {}
-12. public ResponseEntity updateProductImages(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "product-id") Integer productId, @RequestBody @Valid ImageInDTO imageInDTO) {}
-13. public ResponseEntity acceptReturnRequest(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "return-request-id") Integer returnRequestId) {}
-14. public ResponseEntity rejectReturnRequest(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "return-request-id") Integer returnRequestId) {}
+- `/join-a-deal/deal-id/{deal-id}`  
+  `joinADeal`  
+
+- `/leave-a-deal/customer-deal-id/{customer-deal-id}`  
+  `leaveADeal`  
+
+- `/get-customer-favorites`  
+  `getCustomerFavorites`  
+
+- `/update-quantity-to-buy/customer-deal-id/{customer-deal-id}`  
+  `updateQuantityToBuy`  
+
+- `/add-product-to-favorite/product-id/{product-id}`  
+  `addProductToFavorite`  
+
+- `/remove-product-from-favorite/product-id/{product-id}`  
+  `removeProductFromFavorite`  
+
+- `/get-customer-reviews/customer-id/{customer-id}`  
+  `getCustomerReviews`  
+
+- `/review-a-customer/reviewed-id/{reviewed-id}`  
+  `reviewACustomer`  
+
+- `/update-a-customer-review/review-id/{review-id}`  
+  `updateACustomerReview`  
+
+- `/get-product-reviews/product-id/{product-id}`  
+  `viewProductReviews`  
+
+- `/review-a-product/product-id/{product-id}`  
+  `reviewAProduct`  
+
+- `/update-a-product-review/product-review-id/{product-review-id}`  
+  `updateAProductReview`  
+
+- `/get-customer-pardon-requests`  
+  `getCustomerBlackListPardonRequests`  
+
+- `/request-a-pardon/vendor-id/{vendor-id}`  
+  `requestAPardon`  
+
+- `/update-a-pardon-request/pardon-request-id/{pardon-request-id}`  
+  `updateAPardonRequest`  
+
+- `/pay/deal-id/{deal-id}`  
+  `pay`  
+
+- `/pay-with-points/deal-id/{deal-id}`  
+  `payWithPoints`  
+
+- `/decline-to-pay/deal-id/{deal-id}`  
+  `declineToPay`  
+
+- `/get-product-open-deals/{product-id}`  
+  `getProductOpenDeals`  
+
+- `/get-vendor-open-deals/vendor-id/{vendor-id}`  
+  `viewVendorOpenDeals`  
+
+- `/get-vendor-black-list`  
+  `getVendorBlackList`  
+
+- `/add-customer-to-blacklist/customer-id/{customer-id}`  
+  `addCustomerToBlacklist`  
+
+- `/remove-customer-from-blacklist/{customer-id}`  
+  `removeCustomerFromBlackList`  
+
+- `/get-vendor-blacklist-pardon-request`  
+  `getVendorBlackListPardonRequests`  
+
+- `/approve-pardon-request/{pardon-request-id}`  
+  `approvePardonRequest`  
+
+- `/reject-pardon-request/{pardon-request-id}`  
+  `rejectPardonRequest`  
