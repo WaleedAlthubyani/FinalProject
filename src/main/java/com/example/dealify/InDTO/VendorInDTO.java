@@ -10,9 +10,9 @@ import org.hibernate.annotations.Check;
 public class VendorInDTO {//Ebtehal
     private Integer Id;
 
-    @NotEmpty(message = "User Name cannot be null")
-    @Size(min = 2, max = 20, message = " Name can not be less than 2 and more than 20 characters")
-    private String name;
+    @NotEmpty(message = "Full name cannot be null")
+    @Size(min = 2, max = 20, message = "Full name can not be less than 2 and more than 20 characters")
+    private String fullName;
 
     @NotEmpty(message = "Username cannot be empty")
     @Size(min = 3, max = 10, message = "Username can not be less than 3 and  more than 10 characters")

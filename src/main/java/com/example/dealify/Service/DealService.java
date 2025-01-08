@@ -23,6 +23,16 @@ public class DealService {
     private final ProductRepository productRepository;
     private final CustomerDealService customerDealService;
     private final BlackListRepository blackListRepository;
+    private final CustomerDealRepository customerDealRepository;
+
+    public List<Deal> getAllDeals(){//Waleed
+        return dealRepository.findAll();
+    }
+    public void deleteADeal(Integer dealId){//Waleed
+        Deal deal=dealRepository.findDealById(dealId);
+        if (deal==null) throw new ApiException("deal not found");
+        dealRepository.delete(deal);
+    }
 
     public void createDeal(CustomerProfile customer, Integer productId, DealCreationInDTO dealDTO) { //Waleed
 
@@ -35,6 +45,9 @@ public class DealService {
         if (dealRepository.findDealByProductAndParticipantsLimitAndStatus(product,Integer.parseInt(dealDTO.getParticipantsLimit()),"Open")!=null){
             throw new ApiException("A deal with these many participants already exists");
         }
+
+        if (customerDealRepository.checkIfCustomerJoinedAnotherDealForThisProduct(customer,product))
+            throw new ApiException("You already joined a deal for this product");
 
         Deal deal = new Deal();
 

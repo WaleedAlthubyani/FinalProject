@@ -48,7 +48,7 @@ public class ReturnRequestService { //Renad
                     returnRequest.getProduct().getBrand(),
                     returnRequest.getProduct().getName(),
                     returnRequest.getProduct().getPrice(),
-                    returnRequest.getVendorProfile().getVendor().getMyUser().getName());
+                    returnRequest.getVendorProfile().getVendor().getMyUser().getFullName());
 
             returnRequestOutDTOS.add(returnRequestOutDTO);
         }
@@ -131,7 +131,7 @@ public class ReturnRequestService { //Renad
                     customerReturnRequest.getProduct().getBrand(),
                     customerReturnRequest.getProduct().getName(),
                     customerReturnRequest.getProduct().getPrice(),
-                    customerReturnRequest.getVendorProfile().getVendor().getMyUser().getName());
+                    customerReturnRequest.getVendorProfile().getVendor().getMyUser().getFullName());
 
             customerReturnRequestOutDTOS.add(customerReturnRequestOutDTO);
         }

@@ -26,12 +26,16 @@ public class BlackListPardonRequestService {
     private final VendorProfileRepository vendorProfileRepository;
     private final BlackListRepository blackListRepository;
 
+    public List<BlackListPardonRequest> getAllBlacklistPardonRequests(){//Waleed
+        return blackListPardonRequestRepository.findAll();
+    }
+
     public List<BlackListPardonRequestOutDTO> getVendorBlackListPardonRequests(VendorProfile vendor){
         List<BlackListPardonRequest> blackListPardonRequests=blackListPardonRequestRepository.findBlackListPardonRequestsByVendor(vendor);
 
         List<BlackListPardonRequestOutDTO> blackListPardonRequestOutDTOS=new ArrayList<>();
         for (BlackListPardonRequest b:blackListPardonRequests){
-            blackListPardonRequestOutDTOS.add(new BlackListPardonRequestOutDTO(b.getCustomer().getMyUser().getName(),b.getReason(),b.getStatus(),b.getVendor().getVendor().getMyUser().getName(),b.getResponse(),b.getRequestDate(),b.getResponseDate()));
+            blackListPardonRequestOutDTOS.add(new BlackListPardonRequestOutDTO(b.getCustomer().getMyUser().getFullName(),b.getReason(),b.getStatus(),b.getVendor().getVendor().getMyUser().getFullName(),b.getResponse(),b.getRequestDate(),b.getResponseDate()));
         }
 
         return blackListPardonRequestOutDTOS;
@@ -44,7 +48,7 @@ public class BlackListPardonRequestService {
 
         List<BlackListPardonRequestOutDTO> blackListPardonRequestOutDTOS=new ArrayList<>();
         for (BlackListPardonRequest b:blackListPardonRequests){
-            blackListPardonRequestOutDTOS.add(new BlackListPardonRequestOutDTO(b.getCustomer().getMyUser().getName(),b.getReason(),b.getStatus(),b.getVendor().getVendor().getMyUser().getName(),b.getResponse(),b.getRequestDate(),b.getResponseDate()));
+            blackListPardonRequestOutDTOS.add(new BlackListPardonRequestOutDTO(b.getCustomer().getMyUser().getFullName(),b.getReason(),b.getStatus(),b.getVendor().getVendor().getMyUser().getFullName(),b.getResponse(),b.getRequestDate(),b.getResponseDate()));
         }
 
         return blackListPardonRequestOutDTOS;

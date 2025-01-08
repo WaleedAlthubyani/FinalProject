@@ -23,6 +23,10 @@ public class CustomerDealService {
     private final CustomerRepository customerRepository;
     private final EmailService emailService;
 
+    public List<CustomerDeal> getAllCustomerDeals() {//Waleed
+        return customerDealRepository.findAll();
+    }
+
     //Waleed
     public void joinDeal(CustomerProfile customerProfile, DealJoinInDTO dealJoinInDTO, Integer dealId) {
         Deal deal = dealRepository.findDealById(dealId);
@@ -30,8 +34,14 @@ public class CustomerDealService {
         if (!deal.getStatus().equalsIgnoreCase("Open"))
             throw new ApiException("Can't join a completed deal");
 
+        if (customerDealRepository.checkIfCustomerJoinedAnotherDealForThisProduct(customerProfile, deal.getProduct()))
+            throw new ApiException("You already joined a deal for this product");
+
         if (blackListRepository.findBlackListByCustomerAndVendor(customerProfile.getCustomer(), deal.getProduct().getInventory().getVendorProfile()) != null)
             throw new ApiException("Customer is in this vendor blacklist");
+
+        CustomerDeal customerDealCheck = customerDealRepository.findCustomerDealByCustomerAndDeal(customerProfile, deal);
+        if (customerDealCheck.getStatus().equalsIgnoreCase("Left")) throw new ApiException("You left this deal before");
 
         if (Objects.equals(deal.getCurrentParticipants(), deal.getParticipantsLimit())) {
             throw new ApiException("Deal participants limit has been reached");
@@ -39,6 +49,31 @@ public class CustomerDealService {
 
         if (customerDealRepository.findCustomerDealByCustomerAndDeal(customerProfile, deal) != null)
             throw new ApiException("Can't join the same deal twice");
+
+        List<Deal> deals = dealRepository.findDealsByProduct(deal.getProduct());
+        Integer totalQuantity = 0;
+        for (Deal d : deals) {
+            totalQuantity += d.getQuantity();
+        }
+        if (totalQuantity + dealJoinInDTO.getQuantity() > deal.getProduct().getStock()) {
+            emailService.sendEmail(
+                    deal.getProduct().getInventory().getVendorProfile().getVendor().getMyUser().getEmail(),
+                    "A customer tried to join a deal on your product but the quantity they want exceeds the current stock",
+                    "Dear " + deal.getProduct().getInventory().getVendorProfile().getVendor().getMyUser().getFullName() + ",\n\n" +
+                            "We wanted to inform you that the product \"" + deal.getProduct().getName() + "\" is facing a stock issue. Currently, the remaining stock is " + deal.getProduct().getStock() + ". However, the total amount requested by each customer is " + totalQuantity + ".\n\n" +
+                            "Here are some additional details to assist you:\n" +
+                            "- Product SKU: " + deal.getProduct().getSKU() + "\n" +
+                            "- Product Category: " + deal.getProduct().getCategory().getName() + "\n" +
+                            "- Total Quantity Requested: " + totalQuantity + "\n" +
+                            "- Deal ID: " + deal.getId() + "\n" +
+                            "- Current Participants: " + deal.getCustomerDeals().size() + " customers have joined this deal so far.\n\n" +
+                            "Please review the stock for this product and replenish as needed to avoid any disruptions to the deals.\n\n" +
+                            "Best regards,\n" +
+                            "Dealify Team"
+            );
+
+            throw new ApiException("The amount you want to buy exceeds the product stock limit the available stock is " + (deal.getProduct().getStock() - totalQuantity));
+        }
 
         CustomerDeal customerDeal = new CustomerDeal();
         customerDeal.setCustomer(customerProfile);
@@ -56,7 +91,7 @@ public class CustomerDealService {
         dealRepository.save(deal);
 
         if (Objects.equals(deal.getParticipantsLimit(), deal.getCurrentParticipants())) {
-            List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDeal(deal);
+            List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDealAndStatus(deal, "Joined");
 
             for (CustomerDeal c : customerDeals) {
                 String customerEmail = c.getCustomer().getCustomer().getMyUser().getEmail();
@@ -107,6 +142,9 @@ public class CustomerDealService {
         if (!customerDeal.getCustomer().equals(customerProfile))
             throw new ApiException("Unauthorized to update another customer's quantity");
 
+        if (customerDeal.getStatus().equalsIgnoreCase("left"))
+            throw new ApiException("You can't edit a deal you left.");
+
 
         Deal deal = dealRepository.findDealById(customerDeal.getDeal().getId());
         if (deal.getStatus().equalsIgnoreCase("Completed")) throw new ApiException("Can't edit a completed deal");
@@ -130,7 +168,7 @@ public class CustomerDealService {
             rejectPay(customerProfile, customerDeal.getDeal().getId());
 
         if (!customerDeal.getCustomer().equals(customerProfile))
-            throw new ApiException("Unauthorized to do this action");
+            throw new ApiException("You can't leave a deal on behalf of another customer");
 
         Deal deal = dealRepository.findDealById(customerDeal.getDeal().getId());
 
@@ -147,7 +185,8 @@ public class CustomerDealService {
 
         deal.setQuantity(deal.getQuantity() - customerDeal.getQuantity());
         deal.setCurrentParticipants(deal.getCurrentParticipants() - 1);
-        customerDealRepository.delete(customerDeal);
+        customerDeal.setStatus("Left");
+        customerDealRepository.save(customerDeal);
         dealRepository.save(deal);
     }
 
@@ -160,8 +199,9 @@ public class CustomerDealService {
 
         CustomerDeal customerDeal = customerDealRepository.findCustomerDealByCustomerAndDeal(customerProfile, deal);
         if (customerDeal == null) throw new ApiException("You are not part of this deal");
+        if (customerDeal.getStatus().equalsIgnoreCase("Left")) throw new ApiException("You already left this deal");
 
-        customerDeal.setPayMethod("Card");
+        customerDeal.setPayMethod("Normal");
         customerDealRepository.save(customerDeal);
 
         checkAllAgree(dealId);
@@ -176,6 +216,7 @@ public class CustomerDealService {
 
         CustomerDeal customerDeal = customerDealRepository.findCustomerDealByCustomerAndDeal(customerProfile, deal);
         if (customerDeal == null) throw new ApiException("You are not part of this deal");
+        if (customerDeal.getStatus().equalsIgnoreCase("Left")) throw new ApiException("You already left this deal");
         if (customerProfile.getCustomer().getPoint() < customerDeal.getDiscountedPrice())
             throw new ApiException("You don't have enough points to do this action");
 
@@ -198,7 +239,7 @@ public class CustomerDealService {
 
     public void checkAllAgree(Integer dealId) {
         Deal deal = dealRepository.findDealById(dealId);
-        List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDeal(deal);
+        List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDealAndStatus(deal, "Joined");
 
         int counter = 0;
 
@@ -209,7 +250,7 @@ public class CustomerDealService {
             counter++;
         }
 
-        if (counter < customerDeals.size())
+        if (counter < deal.getParticipantsLimit())
             return;
 
         payNow(dealId);
@@ -219,20 +260,23 @@ public class CustomerDealService {
 
         Deal deal = dealRepository.findDealById(dealId);
 
+
         Product product = productRepository.findProductById(deal.getProduct().getId());
         product.setStock(product.getStock() - deal.getQuantity());
         productRepository.save(product);
 
-        List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDeal(deal);
+        List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDealAndStatus(deal, "Joined");
 
         int points;
         for (CustomerDeal d : customerDeals) {
 
             Customer customer = customerRepository.findCustomerById(d.getCustomer().getId());
+            if (d.getStatus().equalsIgnoreCase("Left")) continue;
+
 
             points = d.getQuantity() / 10;
 
-            if (d.getPayMethod().equalsIgnoreCase("card"))
+            if (d.getPayMethod().equalsIgnoreCase("Normal"))
                 customer.setPoint(customer.getPoint() + points);
             else
                 customer.setPoint((int) (customer.getPoint() - d.getDiscountedPrice()));
@@ -256,27 +300,29 @@ public class CustomerDealService {
 
         CustomerDeal customerDeal = customerDealRepository.findCustomerDealByCustomerAndDeal(customerProfile, deal);
         if (customerDeal == null) throw new ApiException("You are not part of this deal");
+        if (customerDeal.getStatus().equalsIgnoreCase("Left")) throw new ApiException("You left this deal");
 
-        deal.setCurrentParticipants(deal.getCurrentParticipants()-1);
-        List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDeal(deal);
+        deal.setCurrentParticipants(deal.getCurrentParticipants() - 1);
+        List<CustomerDeal> customerDeals = customerDealRepository.findCustomerDealsByDealAndStatus(deal, "Joined");
 
         for (int i = 0; i < customerDeals.size(); i++) {
             // Retrieve customer deal by ID
             CustomerDeal customerDeal1 = customerDealRepository.findCustomerDealById(customerDeals.get(i).getId());
+            if (customerDeal.getStatus().equalsIgnoreCase("Left")) continue;
 
             // Update the payment method to "Pending"
             customerDeal1.setPayMethod("Pending");
 
             // Compose the email message
-            String subject = "Unfortunately " + customerDeal.getCustomer().getCustomer().getMyUser().getName() + " Has rejected to pay";
+            String subject = "Unfortunately " + customerDeal.getCustomer().getCustomer().getMyUser().getFullName() + " Has rejected to pay";
             String body = String.format(
                     "Hello %s,\n\n" +
                             "We are sorry to inform you that %s has decided not to continue with the deal and has left.\n" +
                             "Once someone else joins in their place, you will receive an email.\n\n" +
                             "Best regards,\n" +
                             "Dealify team",
-                    customerDeal1.getCustomer().getCustomer().getMyUser().getName(),
-                    customerDeal.getCustomer().getCustomer().getMyUser().getName()
+                    customerDeal1.getCustomer().getCustomer().getMyUser().getFullName(),
+                    customerDeal.getCustomer().getCustomer().getMyUser().getFullName()
             );
 
             // Send the email notification

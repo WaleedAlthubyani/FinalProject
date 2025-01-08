@@ -81,9 +81,9 @@ public class ProductService {
     }
 
     // 2.2 Post
-    public void addProduct(Integer vendorId, ProductInDTO productInDTO) { //Renad
+    public void addProduct(Integer vendorId, Integer categoryId, ProductInDTO productInDTO) { //Renad
         // Step 1: Validate category & vendor existence
-        Category category = categoryRepository.findCategoryById(productInDTO.getCategoryId());
+        Category category = categoryRepository.findCategoryById(categoryId);
         if (category == null) {
             throw new ApiException("Category Not Found.");
         }
@@ -120,7 +120,7 @@ public class ProductService {
     }
 
     // 2.3 Update
-    public void updateProduct(Integer vendorId, Integer productId, ProductInDTO productInDTO) { //Renad
+    public void updateProduct(Integer vendorId, Integer productId, Integer categoryId, ProductInDTO productInDTO) { //Renad
         // Step 1: Find the existing product by ID
         Product product = productRepository.findProductById(productId);
 
@@ -140,9 +140,9 @@ public class ProductService {
         }
 
         // Step 4: Validate category existence
-        Category category = product.getCategory(); // Default to the current category
-        if (productInDTO.getCategoryId() != null) {
-            category = categoryRepository.findCategoryById(productInDTO.getCategoryId());
+        Category category = null; // Default to the current category
+        if (categoryId != null) {
+            category = categoryRepository.findCategoryById(categoryId);
             if (category == null) {
                 throw new ApiException("Category Not Found.");
             }

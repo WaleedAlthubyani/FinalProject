@@ -26,16 +26,16 @@ public class ProductController {
     }
 
     // 2.2 Post
-    @PostMapping("/add-product") //Renad
-    public ResponseEntity addProduct(@AuthenticationPrincipal MyUser myUser, @RequestBody @Valid ProductInDTO productInDTO) {
-        productService.addProduct(myUser.getId(), productInDTO);
+    @PostMapping("/add-product/category-id/{category-id}") //Renad
+    public ResponseEntity addProduct(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "category-id") Integer categoryId, @RequestBody @Valid ProductInDTO productInDTO) {
+        productService.addProduct(myUser.getId(), categoryId, productInDTO);
         return ResponseEntity.status(200).body(new ApiResponse("New Product Added."));
     }
 
     // 2.3 Update
-    @PutMapping("/update/product-id/{product-id}") //Renad
-    public ResponseEntity updateProduct(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "product-id") Integer productId, @RequestBody @Valid ProductInDTO productInDTO) {
-        productService.updateProduct(myUser.getId(), productId, productInDTO);
+    @PutMapping("/update/product-id/{product-id}/category-id/{category-id}") //Renad
+    public ResponseEntity updateProduct(@AuthenticationPrincipal MyUser myUser, @PathVariable(name = "product-id") Integer productId, @PathVariable(name = "category-id") Integer categoryId, @RequestBody @Valid ProductInDTO productInDTO) {
+        productService.updateProduct(myUser.getId(), productId, categoryId, productInDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Product Updated."));
     }
 

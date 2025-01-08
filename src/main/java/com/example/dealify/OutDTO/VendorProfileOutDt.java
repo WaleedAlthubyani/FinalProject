@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 //for customer to get vendor by city
 public class VendorProfileOutDt { //ebtehal
-    private String name;
+    private String fullName;
     private String phoneNumber;
 
     public VendorProfileOutDt(){

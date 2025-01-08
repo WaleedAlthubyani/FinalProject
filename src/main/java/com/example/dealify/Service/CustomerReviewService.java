@@ -27,7 +27,7 @@ public class CustomerReviewService {
         List<CustomerReview> customerReviews = customerReviewRepository.findAll();
         List<CustomerReviewOutDTO> customerReviewOutDTOS = new ArrayList<>();
         for (CustomerReview customerReview : customerReviews) {
-            CustomerReviewOutDTO customerReviewOutDTO = new CustomerReviewOutDTO(customerReview.getSender().getName(), customerReview.getRating(), customerReview.getComment(), customerReview.getCreatedAt());
+            CustomerReviewOutDTO customerReviewOutDTO = new CustomerReviewOutDTO(customerReview.getSender().getFullName(), customerReview.getRating(), customerReview.getComment(), customerReview.getCreatedAt());
             customerReviewOutDTOS.add(customerReviewOutDTO);
         }
         return customerReviewOutDTOS;
@@ -37,6 +37,9 @@ public class CustomerReviewService {
     public void reviewACustomer(MyUser sender, CustomerProfile receiver, CustomerReviewInDTO customerReviewInDTO) {//Waleed
         if (sender == null) throw new ApiException("Sender Not Found.");
         if (receiver == null) throw new ApiException("Receiver Not Found.");
+
+        if (customerReviewRepository.findCustomerReviewByCustomerAndSender(receiver, sender) != null)
+            throw new ApiException("You already reviewed this customer");
 
         CustomerReview customerReview = new CustomerReview();
         customerReview.setCustomer(receiver);
@@ -90,7 +93,7 @@ public class CustomerReviewService {
         List<CustomerReviewOutDTO> customerReviewOutDTOS = new ArrayList<>();
 
         for (CustomerReview cr : customerReviews) {
-            customerReviewOutDTOS.add(new CustomerReviewOutDTO(cr.getSender().getName(), cr.getRating(), cr.getComment(), cr.getCreatedAt()));
+            customerReviewOutDTOS.add(new CustomerReviewOutDTO(cr.getSender().getFullName(), cr.getRating(), cr.getComment(), cr.getCreatedAt()));
         }
 
         return customerReviewOutDTOS;

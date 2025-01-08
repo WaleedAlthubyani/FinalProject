@@ -30,7 +30,6 @@ public class VendorProfileService {  //Ebtehal
         VendorProfile vendorProfile = vendorProfileRepository.findVendorProfileById(vendorId);
 
         vendorProfile.setCompanyName(vendorProfileInDTO.getCompanyName());
-        vendorProfile.setFundamentalFile(vendorProfileInDTO.getFundamentalFile());
         vendorProfile.setCity(vendorProfileInDTO.getCity());
 
         vendorProfileRepository.save(vendorProfile);
@@ -59,7 +58,7 @@ public class VendorProfileService {  //Ebtehal
                     review.getDeliveryRating(),
                     review.getReturnPolicyRating(),
                     review.getComment(),
-                    customer.getName()
+                    customer.getFullName()
             ));
         }
         return reviews;
@@ -67,18 +66,18 @@ public class VendorProfileService {  //Ebtehal
 
     //endPoint get vendor by city
     //Ebtehal
-   public List<VendorProfileOutDt> getVendorByCity(String city) {
-       List<VendorProfile> vendorProfiles = vendorProfileRepository.findVendorProfileByCity(city);
-      if (vendorProfiles == null || vendorProfiles.isEmpty()) {
-           throw new ApiException("There is no vendor in that city");
+    public List<VendorProfileOutDt> getVendorByCity(String city) {
+        List<VendorProfile> vendorProfiles = vendorProfileRepository.findVendorProfileByCity(city);
+        if (vendorProfiles == null || vendorProfiles.isEmpty()) {
+            throw new ApiException("There is no vendor in that city");
         }
         List<VendorProfileOutDt> vendorProfileOutDTOS = new ArrayList<>();
-       for (VendorProfile vendorProfile : vendorProfiles) {
-           VendorProfileOutDt vendorProfileOutDTO = new VendorProfileOutDt();
-         vendorProfileOutDTO.setName(vendorProfile.getVendor().getMyUser().getName());
-           vendorProfileOutDTO.setPhoneNumber(vendorProfile.getVendor().getPhoneNumber());
-           vendorProfileOutDTOS.add(vendorProfileOutDTO);
-       }
-      return vendorProfileOutDTOS;
+        for (VendorProfile vendorProfile : vendorProfiles) {
+            VendorProfileOutDt vendorProfileOutDTO = new VendorProfileOutDt();
+            vendorProfileOutDTO.setFullName(vendorProfile.getVendor().getMyUser().getFullName());
+            vendorProfileOutDTO.setPhoneNumber(vendorProfile.getVendor().getMyUser().getPhoneNumber());
+            vendorProfileOutDTOS.add(vendorProfileOutDTO);
+        }
+        return vendorProfileOutDTOS;
     }
 }

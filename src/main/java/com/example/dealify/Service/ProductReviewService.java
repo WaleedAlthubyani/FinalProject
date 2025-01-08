@@ -22,38 +22,49 @@ public class ProductReviewService {
     private final ProductReviewRepository productReviewRepository;
     private final ProductRepository productRepository;
 
-    public List<ProductReviewOutDTO> getAllProductReviews(Product product){
-        List<ProductReview> productReviews=productReviewRepository.findProductReviewsByProduct(product);
-        if (productReviews==null) throw new ApiException("Product reviews not found");
+    public List<ProductReview> getProductReviews() {//Waleed
+        return productReviewRepository.findAll();
+    }
 
-        List<ProductReviewOutDTO> productReviewOutDTOS=new ArrayList<>();
-        for (ProductReview pr:productReviews){
-            productReviewOutDTOS.add(new ProductReviewOutDTO(pr.getCustomer().getMyUser().getName(),pr.getOverallRating(),pr.getQualityRating(),pr.getPackageRating(),pr.getComment()));
+    public void deleteAProductReview(Integer productReviewId) {//Waleed
+        ProductReview productReview = productReviewRepository.findProductReviewById(productReviewId);
+        if (productReview == null) throw new ApiException("Product review not found");
+
+        productReviewRepository.delete(productReview);
+    }
+
+    public List<ProductReviewOutDTO> getAllProductReviews(Product product) {
+        List<ProductReview> productReviews = productReviewRepository.findProductReviewsByProduct(product);
+        if (productReviews == null) throw new ApiException("Product reviews not found");
+
+        List<ProductReviewOutDTO> productReviewOutDTOS = new ArrayList<>();
+        for (ProductReview pr : productReviews) {
+            productReviewOutDTOS.add(new ProductReviewOutDTO(pr.getCustomer().getMyUser().getFullName(), pr.getOverallRating(), pr.getQualityRating(), pr.getPackageRating(), pr.getComment()));
         }
 
         return productReviewOutDTOS;
     }
 
-    public void reviewAProduct(Customer customer, Integer productId, ProductReviewInDTO productReviewInDTO){ // Ebtehal
-        Product product=productRepository.findProductById(productId);
-        if (product==null) throw new ApiException("Product not found");
+    public void reviewAProduct(Customer customer, Integer productId, ProductReviewInDTO productReviewInDTO) { // Ebtehal
+        Product product = productRepository.findProductById(productId);
+        if (product == null) throw new ApiException("Product not found");
 
-        ProductReview productReview=new ProductReview();
+        ProductReview productReview = new ProductReview();
         productReview.setProduct(product);
         productReview.setComment(productReviewInDTO.getComment());
         productReview.setQualityRating(productReviewInDTO.getQualityRating());
         productReview.setPackageRating(productReviewInDTO.getPackageRating());
-        productReview.setOverallRating(((double)productReviewInDTO.getPackageRating()+(double)productReviewInDTO.getQualityRating())/2.0);
+        productReview.setOverallRating(((double) productReviewInDTO.getPackageRating() + (double) productReviewInDTO.getQualityRating()) / 2.0);
         productReview.setCreatedAt(LocalDate.now());
         productReview.setCustomer(customer);
 
         productReviewRepository.save(productReview);
     }
 
-    public void updateReview(Customer customer,Integer productReviewId, ProductReviewInDTO productReviewInDTO){
+    public void updateReview(Customer customer, Integer productReviewId, ProductReviewInDTO productReviewInDTO) {
 
-        ProductReview productReview=productReviewRepository.findProductReviewById(productReviewId);
-        if (productReview==null) throw new ApiException("Review not found");
+        ProductReview productReview = productReviewRepository.findProductReviewById(productReviewId);
+        if (productReview == null) throw new ApiException("Review not found");
 
         if (!productReview.getCustomer().equals(customer))
             throw new ApiException("You can't update someone else's review");
@@ -61,7 +72,7 @@ public class ProductReviewService {
         productReview.setUpdatedAt(LocalDate.now());
         productReview.setPackageRating(productReviewInDTO.getPackageRating());
         productReview.setQualityRating(productReviewInDTO.getQualityRating());
-        productReview.setOverallRating(((double)productReviewInDTO.getPackageRating()+(double)productReviewInDTO.getQualityRating())/2.0);
+        productReview.setOverallRating(((double) productReviewInDTO.getPackageRating() + (double) productReviewInDTO.getQualityRating()) / 2.0);
         productReview.setComment(productReviewInDTO.getComment());
 
         productReviewRepository.save(productReview);

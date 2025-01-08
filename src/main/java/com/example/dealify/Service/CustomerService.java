@@ -55,8 +55,9 @@ public class CustomerService {
 
         // إنشاء كيان MyUser
         MyUser myUser1 = new MyUser();
-        myUser1.setName(customerDTO.getName());
+        myUser1.setFullName(customerDTO.getFullName());
         myUser1.setUsername(customerDTO.getUsername());
+        myUser1.setPhoneNumber(customerDTO.getPhoneNumber());
         myUser1.setEmail(customerDTO.getEmail());
         String hashPassword = new BCryptPasswordEncoder().encode(customerDTO.getPassword());
         myUser1.setPassword(hashPassword);
@@ -83,7 +84,7 @@ public class CustomerService {
             throw new ApiException(" customer not found");
         }
 
-        oldUser.setName(customerInDTO.getName());
+        oldUser.setFullName(customerInDTO.getFullName());
         oldUser.setUsername(customerInDTO.getUsername());
         oldUser.setEmail(customerInDTO.getEmail());
         oldUser.setPassword((customerInDTO.getPassword()));
@@ -106,7 +107,7 @@ public class CustomerService {
         CustomerProfile customerProfile = customerProfileRepository.findCustomerProfileById(id);
         if (customerProfile == null) throw new ApiException("Customer not found");
 
-        return new CustomerOutDTO(customerProfile.getCustomer().getMyUser().getUsername(), customerProfile.getCustomer().getMyUser().getName(), customerProfile.getCity(), customerProfile.getDistrict(), customerProfile.getStreet());
+        return new CustomerOutDTO(customerProfile.getCustomer().getMyUser().getUsername(), customerProfile.getCustomer().getMyUser().getFullName(), customerProfile.getCustomer().getMyUser().getPhoneNumber(), customerProfile.getCity(), customerProfile.getDistrict(), customerProfile.getStreet());
     }
 
     //Waleed
@@ -240,6 +241,10 @@ public class CustomerService {
         if (inviterProfile == null) {
             throw new ApiException("Inviter not found");
         }
+        Deal deal = dealRepository.findDealById(dealId);
+        if (deal == null) {
+            throw new ApiException("deal not found");
+        }
 
         CustomerProfile inviteeProfile = customerProfileRepository.findCustomerProfileById(inviteeCustomerId);
         if (inviteeProfile == null) {
@@ -251,14 +256,14 @@ public class CustomerService {
 
     // Helper method
     private void sendInvite(CustomerProfile inviterProfile, CustomerProfile inviteeProfile, Integer dealId) {  //Ebtehal
-        String inviterName = inviterProfile.getCustomer().getMyUser().getName();
+        String inviterName = inviterProfile.getCustomer().getMyUser().getFullName();
         String inviteeEmail = inviteeProfile.getCustomer().getMyUser().getEmail();
         Deal deal = dealRepository.findDealById(dealId);
         if (deal == null) {
             throw new ApiException("Deal not found");
         }
 
-        if (deal.getCurrentParticipants().equals(deal.getParticipantsLimit())){
+        if (deal.getCurrentParticipants().equals(deal.getParticipantsLimit())) {
             throw new ApiException("Deal participation limit has been reached. Can't invite anyone to this deal.");
         }
 
@@ -374,8 +379,4 @@ public class CustomerService {
 
         customerDealService.rejectPay(customer, dealId);
     }
-
-
-
-
 }

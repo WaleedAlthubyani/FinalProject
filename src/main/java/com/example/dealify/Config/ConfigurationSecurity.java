@@ -60,7 +60,19 @@ public class ConfigurationSecurity {
                         "/api/v1/category/delete-category/category-id/{category-id}",
                         "/api/v1/vendor/activate/vendor-id/{vendor-id}",
                         "/api/v1/return-request/get-all-return-requests",
-                        "/api/v1/customer-review/get-All-customers-reviews").hasAuthority("ADMIN")
+                        "/api/v1/customer-review/get-All-customers-reviews",
+                        "/api/v1/customer-deal/get-all-customer-deals",
+                        "/api/v1/blacklist/get-all-blacklists",
+                        "/api/v1/blacklist-pardon-request/get-all-blacklist-pardon-requests",
+                        "/api/v1/deal/get-all-deals",
+                        "/api/v1/deal/delete-a-deal/{deal-id}",
+                        "/api/v1/favorite/get-all-favorites",
+                        "/api/v1/image/get-all-images",
+                        "/api/v1/image/delete-image/{image-id}",
+                        "/api/v1/product-review/get-products-reviews",
+                        "/api/v1/product-review/delete-a-product-review/{product-review-id}",
+                        "/api/v1/vendor-review/get-all-vendorsReviews",
+                        "/api/v1/vendor-review/delete-a-vendor-review/{vendor-review-id}").hasAuthority("ADMIN")
 
                 .requestMatchers("/api/v1/vendor/update-vendor",
                         "/api/v1/vendor/delete-vendor",
@@ -76,9 +88,9 @@ public class ConfigurationSecurity {
                         "/api/v1/vendor/accept-return-request/{return-request-id}",
                         "/api/v1/vendor/reject-return-request/{return-request-id}",
                         "/api/v1/vendor-profile/update-vendor-profile",
-                        "/api/v1/product/add-product",
+                        "/api/v1/product/add-product/category-id/{category-id}",
                         "/api/v1/product/update/product-id/{product-id}",
-                        "/api/v1/product/delete/product-id/{product-id}",
+                        "/api/v1/product/delete/product-id/{product-id}/category-id/{category-id}",
                         "/api/v1/product/low-stock/{stock-limit}").hasAuthority("VENDOR")
 
                 .requestMatchers("/api/v1/customer/update-customer"
