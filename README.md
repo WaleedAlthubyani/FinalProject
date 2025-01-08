@@ -1,6 +1,6 @@
-# Delify | صفقتنا
+# Dealify | صفقتنا
 
-**"Delify | صفقتنا"** is an innovative platform that offers users the opportunity to purchase products at discounted prices by gathering a sufficient number of participants for the same deal.
+**"Dealify | صفقتنا"** is an innovative platform that offers users the opportunity to purchase products at discounted prices by gathering a sufficient number of participants for the same deal.
 
 ---
 
@@ -34,9 +34,9 @@
 
 ---
 
-### صفقتنا | Delify
+### صفقتنا | Dealify
 
-"Delify | صفقتنا" هي منصة مبتكرة تتيح للمستخدمين شراء المنتجات بأسعار مخفضة من خلال تجمع عدد كافٍ من المشاركين في نفس الصفقة.
+"Dealify | صفقتنا" هي منصة مبتكرة تتيح للمستخدمين شراء المنتجات بأسعار مخفضة من خلال تجمع عدد كافٍ من المشاركين في نفس الصفقة.
 
 ---
 
