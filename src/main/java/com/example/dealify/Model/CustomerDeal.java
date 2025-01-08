@@ -30,7 +30,7 @@ public class CustomerDeal {  //Waleed
     private Double discountedPrice;
 
     //Pending-Normal-Points
-    @Column(columnDefinition = "varchar(6)")
+    @Column(columnDefinition = "varchar(7)")
     private String payMethod="Pending";
 
     @CreationTimestamp

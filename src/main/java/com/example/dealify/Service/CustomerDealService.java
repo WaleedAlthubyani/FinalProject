@@ -41,8 +41,10 @@ public class CustomerDealService {
             throw new ApiException("Customer is in this vendor blacklist");
 
         CustomerDeal customerDealCheck = customerDealRepository.findCustomerDealByCustomerAndDeal(customerProfile, deal);
-        if (customerDealCheck.getStatus().equalsIgnoreCase("Left")) throw new ApiException("You left this deal before");
-
+        if (customerDealCheck!=null) {
+            if (customerDealCheck.getStatus().equalsIgnoreCase("Left"))
+                throw new ApiException("You left this deal before");
+        }
         if (Objects.equals(deal.getCurrentParticipants(), deal.getParticipantsLimit())) {
             throw new ApiException("Deal participants limit has been reached");
         }
