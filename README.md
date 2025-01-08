@@ -75,9 +75,6 @@ UseCase Diagrams:
 Class Diagram:
 - ![Class Diagram](https://github.com/user-attachments/assets/6df6f3d8-4659-480f-b86a-6cc68798e1a8)
 
-
-Got it! Here's the original content formatted neatly without altering the wording:
-
 ---
 
 ## My Work
