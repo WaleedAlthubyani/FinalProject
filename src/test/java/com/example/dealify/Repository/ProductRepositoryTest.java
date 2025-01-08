@@ -62,11 +62,11 @@ public class ProductRepositoryTest {
         productRepository.save(product2);
 
 
-        myUser=new MyUser(null,"Mohammed","MohammedLi","Mohammed@gmail.com","123456ABCd@","VENDOR",null,null,null);
+        myUser=new MyUser(null,"Mohammed","MohammedLi","Mohammed@gmail.com","123456ABCd@","0555555555","VENDOR",null,null,null);
         authRepository.save(myUser);
-        vendor=new Vendor(null,"0592787142","123456789","Active",myUser,null);
+        vendor=new Vendor(null,"123456789","Active",myUser,null);
         vendorRepository.save(vendor);
-        vendorProfile=new VendorProfile(null,"ElectoDeal","NOEASCA","Riyadh",vendor,null,null,null,null);
+        vendorProfile=new VendorProfile(null,"ElectoDeal","Riyadh",vendor,null,null,null,null);
         vendorProfileRepository.save(vendorProfile);
         inventory=new Inventory(null,55,205, LocalDateTime.now(),null,vendorProfile);
         inventoryRepository.save(inventory);

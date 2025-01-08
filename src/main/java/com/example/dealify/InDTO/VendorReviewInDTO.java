@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 //Ebtehal
@@ -36,6 +34,4 @@ public class VendorReviewInDTO {
 
     @Size(max = 255, message = "Comment can't exceed 255 characters.")
     private String comment;
-
-    private LocalDate createdAt;
 }
