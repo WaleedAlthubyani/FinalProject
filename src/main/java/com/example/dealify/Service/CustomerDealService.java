@@ -80,6 +80,7 @@ public class CustomerDealService {
         CustomerDeal customerDeal = new CustomerDeal();
         customerDeal.setCustomer(customerProfile);
         customerDeal.setDeal(deal);
+        customerDeal.setStatus("Joined");
 
         Double discount = calculateDiscount(deal);
         customerDeal.setQuantity(dealJoinInDTO.getQuantity());
