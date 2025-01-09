@@ -1,5 +1,5 @@
 # Dealify | صفقتنا
-Dealify is an innovative platform that offers users the opportunity to purchase products at discounted prices by gathering a sufficient number of participants for the same deal
+Dealify (صفقاتنا) is a Group Buying Platform that connects users to collaboratively purchase products and unlock significant discounts. Customers can create group deals for products, choosing predefined group sizes and enjoying progressively larger discounts as group limits increase.
 #
 Key Features:
 - For Customers:
@@ -30,7 +30,7 @@ Dealify connects users and vendors in a unified platform, creating a collaborati
 
 # النسخة العربية:
 
-"صفقتنا" هي منصة مبتكرة تتيح للمستخدمين شراء المنتجات بأسعار مخفضة من خلال جمع عدد محدد من المشاركين في نفس الصفقة.
+صفقاتنا (Dealify) هي منصة للتسوق الجماعي تربط المستخدمين لشراء المنتجات بشكل مشترك والحصول على خصومات مميزة. يمكن للعملاء إنشاء صفقات جماعية للمنتجات، مع اختيار أحجام مجموعات محددة مسبقًا والاستفادة من خصومات أكبر مع زيادة حجم المجموعة
 
 الميزات الرئيسية:
 - للعملاء:
@@ -66,6 +66,7 @@ Dealify connects users and vendors in a unified platform, creating a collaborati
 - [Figma](https://www.figma.com/design/kUyt9oIMPtgUqbXLnBDkS3/Dealify?node-id=0-1&t=GhXfJIKfyUDjqQfR-1)
 - [Presentation](https://www.canva.com/design/DAGbZqlKQ60/OAW5OSI2w2P_I_IUJoBvkQ/edit?utm_content=DAGbZqlKQ60&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [PostMan API Documentation](https://documenter.getpostman.com/view/39709967/2sAYJAdGzY)
+- [Deployment](http://dealify-env.eba-quip7bd8.eu-central-1.elasticbeanstalk.com)
 
 - ![QR Code](https://github.com/user-attachments/assets/dd59b236-3b36-40fc-91c6-270ec574485a)
 
